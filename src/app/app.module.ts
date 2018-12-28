@@ -8,7 +8,7 @@ import { DiscoveryPage } from '../pages/discovery/discovery';
 import { TabsPage } from '../pages/tabs/tabs';
 import { ChatPage } from '../pages/chat/chat';
 import { NotificationsPage } from '../pages/notifications/notifications';
-import { MenuPage } from '../pages/menu/menu';
+import { MorePage } from '../pages/more/more';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -20,7 +20,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ChatPage,
     NotificationsPage,
     HomePage,
-    MenuPage,
+    MorePage,
     TabsPage
   ],
   imports: [
@@ -34,7 +34,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ChatPage,
     NotificationsPage,
     HomePage,
-    MenuPage,
+    MorePage,
     TabsPage
   ],
   providers: [
