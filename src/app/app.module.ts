@@ -9,9 +9,11 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { ChatPage } from '../pages/chat/chat';
 import { NotificationsPage } from '../pages/notifications/notifications';
 import { MorePage } from '../pages/more/more';
+import { LoginPage } from '../pages/login/login';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+// import { RestProvider } from '../providers/rest/rest';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     NotificationsPage,
     HomePage,
     MorePage,
-    TabsPage
+    TabsPage,
+    LoginPage
   ],
   imports: [
     BrowserModule,
@@ -35,12 +38,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     NotificationsPage,
     HomePage,
     MorePage,
-    TabsPage
+    TabsPage,
+    LoginPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    // RestProvider
   ]
 })
 export class AppModule {}
