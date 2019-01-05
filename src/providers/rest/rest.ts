@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { catchError, map, tap } from 'rxjs/operators';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import { Response } from '@angular/http';
+import {Observable} from 'rxjs';
 
 /*
   Generated class for the RestProvider provider.
@@ -14,7 +15,8 @@ export class RestProvider {
   constructor(public http: HttpClient) {
     console.log('Hello RestProvider Provider');
   }
- //feed
+
+  //feed
   private apiUrlFeeds = 'https://imoocqa.gugujiankong.com/api/feeds/get';
 
   //account
@@ -34,7 +36,6 @@ export class RestProvider {
   private apiUrlSaveFavourite = "https://imoocqa.gugujiankong.com/api/question/savefavourite";
 
 
-
   //notification
   private apiUrlUserNotifications = "https://imoocqa.gugujiankong.com/api/account/usernotifications";
 
@@ -44,30 +45,24 @@ export class RestProvider {
   //* 具体的问题可以在慕课后台提问交流
 
   // https://angular.io/tutorial/toh-pt6
-  private getUrlReturn (url:string): Observable<string[]> {
+  private getUrlReturn(url: string): Observable<string[]>{
     return this.http.get(url)
-      .map(this.extractData)
-      .catchError(this.handerError)
+      .map(v => JSON.parse(v) || {})
+      .catch(this.handerError)
   }
 
-
-  private extractData(res:Response){
-    let body = res.json();
-    return JSON.parse(body) || {};
-  }
-
-  private handerError(error:Response | any){
-    let  errMsg:string;
+  private handerError(error: Response | any) {
+    let errMsg: string;
     if (error instanceof Response) {
       const err = error.json() || '';
       errMsg = `${error.status} - ${error.statusText || ''} ${err}`
-    }else {
+    } else {
       errMsg = error.message ? error.message : error.toString()
     }
-    console.log(errMsg)
     return Observable.throw(errMsg);
   }
-  login(mobile, password): Observable<string[]> {
+
+  login(mobile, password): Observable<string[]>{
     return this.getUrlReturn(this.apiUrlLogin + "?mobile=" + mobile + "&password=" + password);
   }
 

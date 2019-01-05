@@ -23,6 +23,7 @@ export class LoginPage extends BaseUI {
   // 前台获取的值
   mobile: any;
   password: any;
+  errorMessage: any;
 
   constructor(
     public navCtrl: NavController,
@@ -36,16 +37,23 @@ export class LoginPage extends BaseUI {
   }
 
   login() {
-    this.rest.login('15691808595', 'sfdfdsdf')
-      .subscribe((data) =>
-        console.log(data))
     let loading = super.showLoading(this.loadingCtrl, '登陆中...');
-    setTimeout(() => {
-      loading.dismiss();
-      super.showToast(this.toastCtrl, 'toast...');
-    }, 2000);
+    this.rest.login(this.mobile, this.password)
+      .subscribe(f => {
+          loading.dismiss();
+          const {Status, StatusContent} = f;
+          if (Status === 'FAIL') {
+            super.showToast(this.toastCtrl, StatusContent);
+            return;
+          }
+        },
+        error => this.errorMessage = <any>error
+      )
   }
 
+  /**
+   * 关闭当前页面的方法
+   */
   dismiss() {
     this.viewCtrl.dismiss()
   }
