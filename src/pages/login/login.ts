@@ -3,6 +3,7 @@ import {
   IonicPage, NavController, NavParams,
   ViewController, LoadingController, ToastController
 } from 'ionic-angular';
+import {Storage} from '@ionic/storage';
 import {BaseUI} from "../../common/baseui";
 import {RestProvider} from '../../providers/rest/rest';
 
@@ -31,6 +32,7 @@ export class LoginPage extends BaseUI {
     public loadingCtrl: LoadingController,
     public viewCtrl: ViewController,
     public toastCtrl: ToastController,
+    public storage: Storage,
     public rest: RestProvider
   ) {
     super()
@@ -40,12 +42,16 @@ export class LoginPage extends BaseUI {
     let loading = super.showLoading(this.loadingCtrl, '登陆中...');
     this.rest.login(this.mobile, this.password)
       .subscribe(f => {
-          loading.dismiss();
-          const {Status, StatusContent} = f;
-          if (Status === 'FAIL') {
-            super.showToast(this.toastCtrl, StatusContent);
-            return;
+          const {Status, StatusContent, UserId} = f;
+          if(Status === 'OK'){
+            //处理登录成功的页面跳转
+            //你也可以存储接口返回的 token
+            this.storage.set('UserId', UserId);
+            this.dismiss();
+            return ;
           }
+          super.showToast(this.toastCtrl, StatusContent);
+          loading.dismiss();
         },
         error => this.errorMessage = <any>error
       )
