@@ -12,6 +12,7 @@ import { ChatPage } from '../pages/chat/chat';
 import { NotificationsPage } from '../pages/notifications/notifications';
 import { MorePage } from '../pages/more/more';
 import { LoginPage } from '../pages/login/login';
+import { RegisterPage } from '../pages/register/register';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -27,12 +28,15 @@ import { RestProvider } from '../providers/rest/rest';
     HomePage,
     MorePage,
     TabsPage,
-    LoginPage
+    LoginPage,
+    RegisterPage
   ],
   imports: [
     BrowserModule,
     HttpClientModule ,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      backButtonText: '返回'
+    }),
     IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
@@ -44,7 +48,8 @@ import { RestProvider } from '../providers/rest/rest';
     HomePage,
     MorePage,
     TabsPage,
-    LoginPage
+    LoginPage,
+    RegisterPage
   ],
   providers: [
     StatusBar,

@@ -6,6 +6,7 @@ import {
 import {Storage} from '@ionic/storage';
 import {BaseUI} from "../../common/baseui";
 import {RestProvider} from '../../providers/rest/rest';
+import {RegisterPage} from '../register/register';
 
 /**
  * Generated class for the LoginPage page.
@@ -35,7 +36,7 @@ export class LoginPage extends BaseUI {
     public storage: Storage,
     public rest: RestProvider
   ) {
-    super()
+    super()  //调用父类的构造函数 constructor
   }
 
   login() {
@@ -55,6 +56,10 @@ export class LoginPage extends BaseUI {
         },
         error => this.errorMessage = <any>error
       )
+  }
+
+  pushRegisterPage(){
+    this.navCtrl.push(RegisterPage)
   }
 
   /**

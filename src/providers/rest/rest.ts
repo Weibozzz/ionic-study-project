@@ -1,6 +1,6 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import { Response } from '@angular/http';
+import {Response} from '@angular/http';
 import {Observable} from 'rxjs';
 
 /*
@@ -45,7 +45,7 @@ export class RestProvider {
   //* 具体的问题可以在慕课后台提问交流
 
   // https://angular.io/tutorial/toh-pt6
-  private getUrlReturn(url: string): Observable<string[]>{
+  private getUrlReturn(url: string): Observable<string[]> {
     return this.http.get(url)
       .map(v => JSON.parse(v) || {})
       .catch(this.handerError)
@@ -62,8 +62,11 @@ export class RestProvider {
     return Observable.throw(errMsg);
   }
 
-  login(mobile, password): Observable<string[]>{
+  login(mobile, password): Observable<string[]> {
     return this.getUrlReturn(this.apiUrlLogin + "?mobile=" + mobile + "&password=" + password);
   }
 
+  register(mobile, nickname, password): Observable<string[]> {
+    return this.getUrlReturn(this.apiUrlRegister + "?mobile=" + mobile + "&nickname=" + nickname + "&password=" + password);
+  }
 }
