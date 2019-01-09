@@ -69,4 +69,8 @@ export class RestProvider {
   register(mobile, nickname, password): Observable<string[]> {
     return this.getUrlReturn(this.apiUrlRegister + "?mobile=" + mobile + "&nickname=" + nickname + "&password=" + password);
   }
+  getUserInfo(userId): Observable<string[]> {
+    console.log('userId',userId)
+    return this.getUrlReturn(this.apiUrlUserInfo + "?userid=" + userId);
+  }
 }
