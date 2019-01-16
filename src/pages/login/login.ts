@@ -42,8 +42,8 @@ export class LoginPage extends BaseUI {
   login() {
     let loading = super.showLoading(this.loadingCtrl, '登陆中...');
     this.rest.login(this.mobile, this.password)
-      .subscribe((f) => {
-          const {Status, StatusContent, UserId} = f;
+      .subscribe( f => {
+          const {Status, StatusContent, UserId} = f || {};
           if(Status === 'OK'){
             loading.dismiss();
             //处理登录成功的页面跳转

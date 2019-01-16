@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {HeadfacePage} from "../headface/headface";
 
 /**
  * Generated class for the UserPage page.
@@ -28,6 +29,9 @@ export class UserPage {
   }
   logout(){
 
+  }
+  gotoHeadface(){
+    this.navCtrl.push(HeadfacePage)
   }
 
 }
